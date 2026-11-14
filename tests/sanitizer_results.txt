@@ -1,0 +1,84 @@
+
+Empty tree
+  PASS Preorder | expected: [] | actual: []
+  PASS Inorder | expected: [] | actual: []
+  PASS Postorder | expected: [] | actual: []
+  PASS Level order | expected: [] | actual: []
+  PASS Nodes | expected: 0 | actual: 0
+  PASS Leaves | expected: 0 | actual: 0
+  PASS Height | expected: 0 | actual: 0
+  PASS Sum | expected: 0 | actual: 0
+  PASS Root remains null after two destroyTree calls | expected: 1 | actual: 1
+
+Singleton -4
+  PASS Preorder | expected: [-4] | actual: [-4]
+  PASS Inorder | expected: [-4] | actual: [-4]
+  PASS Postorder | expected: [-4] | actual: [-4]
+  PASS Level order | expected: [-4] | actual: [-4]
+  PASS Nodes | expected: 1 | actual: 1
+  PASS Leaves | expected: 1 | actual: 1
+  PASS Height | expected: 1 | actual: 1
+  PASS Sum | expected: -4 | actual: -4
+  PASS Singleton root cleared | expected: 1 | actual: 1
+
+Left-only chain 8-6-4-2
+  PASS Preorder | expected: [8, 6, 4, 2] | actual: [8, 6, 4, 2]
+  PASS Inorder | expected: [2, 4, 6, 8] | actual: [2, 4, 6, 8]
+  PASS Postorder | expected: [2, 4, 6, 8] | actual: [2, 4, 6, 8]
+  PASS Level order | expected: [8, 6, 4, 2] | actual: [8, 6, 4, 2]
+  PASS Nodes | expected: 4 | actual: 4
+  PASS Leaves | expected: 1 | actual: 1
+  PASS Height | expected: 4 | actual: 4
+  PASS Sum | expected: 20 | actual: 20
+  PASS Left chain root cleared | expected: 1 | actual: 1
+
+Right-only chain 8-6-4-2
+  PASS Preorder | expected: [8, 6, 4, 2] | actual: [8, 6, 4, 2]
+  PASS Inorder | expected: [8, 6, 4, 2] | actual: [8, 6, 4, 2]
+  PASS Postorder | expected: [2, 4, 6, 8] | actual: [2, 4, 6, 8]
+  PASS Level order | expected: [8, 6, 4, 2] | actual: [8, 6, 4, 2]
+  PASS Nodes | expected: 4 | actual: 4
+  PASS Leaves | expected: 1 | actual: 1
+  PASS Height | expected: 4 | actual: 4
+  PASS Sum | expected: 20 | actual: 20
+  PASS Right chain root cleared | expected: 1 | actual: 1
+
+Zero, negative and repeated values
+  PASS Preorder | expected: [0, -3, -3, 0, 2] | actual: [0, -3, -3, 0, 2]
+  PASS Inorder | expected: [-3, -3, 0, 2, 0] | actual: [-3, -3, 0, 2, 0]
+  PASS Postorder | expected: [-3, -3, 2, 0, 0] | actual: [-3, -3, 2, 0, 0]
+  PASS Level order | expected: [0, -3, 0, -3, 2] | actual: [0, -3, 0, -3, 2]
+  PASS Nodes | expected: 5 | actual: 5
+  PASS Leaves | expected: 2 | actual: 2
+  PASS Height | expected: 3 | actual: 3
+  PASS Sum | expected: -4 | actual: -4
+  PASS Two initial preorder calls match | expected: [0, -3, -3, 0, 2] | actual: [0, -3, -3, 0, 2]
+  PASS Mutating a snapshot does not affect a new result | expected: [0, -3, -3, 0, 2] | actual: [0, -3, -3, 0, 2]
+  PASS Root value unchanged | expected: 0 | actual: 0
+  PASS Inorder unchanged after traversals | expected: [-3, -3, 0, 2, 0] | actual: [-3, -3, 0, 2, 0]
+  PASS Node count unchanged | expected: 5 | actual: 5
+  PASS Mixed-value root cleared | expected: 1 | actual: 1
+
+Rebuilt two-node tree
+  PASS Preorder | expected: [7, -2] | actual: [7, -2]
+  PASS Inorder | expected: [7, -2] | actual: [7, -2]
+  PASS Postorder | expected: [-2, 7] | actual: [-2, 7]
+  PASS Level order | expected: [7, -2] | actual: [7, -2]
+  PASS Nodes | expected: 2 | actual: 2
+  PASS Leaves | expected: 1 | actual: 1
+  PASS Height | expected: 2 | actual: 2
+  PASS Sum | expected: 5 | actual: 5
+  PASS Rebuilt tree destroyed safely twice | expected: 1 | actual: 1
+
+Additional test: wide tree and long long sum
+  PASS Preorder | expected: [2147483647, 2147483647, 2147483647] | actual: [2147483647, 2147483647, 2147483647]
+  PASS Inorder | expected: [2147483647, 2147483647, 2147483647] | actual: [2147483647, 2147483647, 2147483647]
+  PASS Postorder | expected: [2147483647, 2147483647, 2147483647] | actual: [2147483647, 2147483647, 2147483647]
+  PASS Level order | expected: [2147483647, 2147483647, 2147483647] | actual: [2147483647, 2147483647, 2147483647]
+  PASS Nodes | expected: 3 | actual: 3
+  PASS Leaves | expected: 2 | actual: 2
+  PASS Height | expected: 2 | actual: 2
+  PASS Sum | expected: 6442450941 | actual: 6442450941
+  PASS Large-values tree root cleared | expected: 1 | actual: 1
+
+TOTAL: 68/68 checks passed
