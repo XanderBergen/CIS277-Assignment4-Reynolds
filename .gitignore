@@ -1,0 +1,21 @@
+# Compiled executables
+/tree_explorer
+/student_tests
+/tree_explorer_asan
+/student_tests_asan
+*.exe
+
+# Compiled object files
+*.o
+*.obj
+*.out
+
+# Debugging and crash files
+*.core
+core
+
+# Editor and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
