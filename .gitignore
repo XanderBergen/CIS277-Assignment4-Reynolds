@@ -4,18 +4,52 @@
 /tree_explorer_asan
 /student_tests_asan
 *.exe
+*.out
 
 # Compiled object files
 *.o
 *.obj
-*.out
+
+# Visual Studio solution and project files
+*.sln
+*.slnx
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# Visual Studio generated files
+.vs/
+x64/
+x86/
+Debug/
+Release/
+*.pdb
+*.ilk
+*.idb
+*.ipch
+*.tlog
+*.log
+*.lastbuildstate
+
+# Editor and IDE settings
+.vscode/
+.idea/
+*.user
+*.suo
 
 # Debugging and crash files
 *.core
 core
 
-# Editor and operating system files
-.vscode/
-.idea/
+# Operating system files
 .DS_Store
 Thumbs.db
+
+# Python cache (for validate.py)
+__pycache__/
+*.pyc
+
+# Temporary and backup files
+*.tmp
+*.bak
+*~
