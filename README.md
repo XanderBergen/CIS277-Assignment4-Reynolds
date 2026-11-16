@@ -16,7 +16,7 @@ Each node's parent will be responsible for releasing it's child.
 **Changes to the plan after implementation:**
 The empty-tree base case needed to be different for measurement functions and traversal functions. Measurement functions return 0, while traversal functions return an empty vector.
 The traversal is actaully concerened with the full vector, but to prevent unneccesary copying it is passed by reference to each of the children by its parent, meaning the vector doesn't need to be copied.
-I needed to specifically use postorder deletion to make sure child nodes are deleted before their children. This function also sets all of the pointers to nullptr after deletion.
+I needed to specifically use postorder deletion to make sure child nodes are deleted before their parent. This function also sets all of the pointers to nullptr after deletion.
 Level-order needed to use a FIFO queue instead of recursion, because it needs to process nodes one at a time, from left to right.
 
 **Tree A**
@@ -124,7 +124,7 @@ If necessary, use `python3 validate.py` instead.
 
 The traversal results for Preorder, Inorder, Postorder, and Level order on Tree A and Tree B are identical to the values provided in the assignment. It also correctly counts the number of nodes (7 for Tree A, 5 for Tree B), leaves (4 for Tree A, 2 for Tree B),
 the height in levels (3 for both Trees), and the Sum of all Nodes (350 for Tree A, 80 for Tree B). `tests/student_tests.cpp` has its own `main` and tests each of the four traversals plus all four measurements for each tree. The results are recorded in `tests/student_results.txt`.
-`tests/demo_results.txt` records the console output from compiling and running main.cpp. I also recompiled the demo and test program with GCC 14.2.0 and then ran each with leak detection enabled and halt-on-error settings.  Both runs exited successfully without a reported AddressSanitizer or UndefinedBehaviorSanitizer error.
+I compiled the demonstration and test programs using Clang through MSYS2 CLANG64 with AddressSanitizer and UndefinedBehaviorSanitizer enabled. The results are recorded in `tests/demo_sanitizer_results.txt`, `tests/sanitizer_results.txt`, and `tests/public_sanitizer_results.txt`.
 Logs are in `tests/sanitizer_results.txt` and `tests/demo_sanitizer_results.txt`. The results of `tests/public_tests` are saved in `tests/public_results.txt`, the program passes all 96 checks. `validate.py` runs correctly and passes all checks.
 
 - **Pre:** Preorder
@@ -149,8 +149,8 @@ Logs are in `tests/sanitizer_results.txt` and `tests/demo_sanitizer_results.txt`
 1. Preorder: 30 -> 20 -> 40. Inorder: 20 -> 30 -> 40. Postorder: 20 -> 40 -> 30. The sequences change beccause preorder visits the root, then left, then right, inorder visits left, root, then right, and postorder visits left, right, then root. Despite the changing sequences, each traversal contains the same nodes, so the sum is identical.
 2. Each node has 2 or fewer children, so B is a valid binary tree. However 30 is the left child of the root 10, but a BST would require a smaller value to be the left child, so it violates left-child ordering. B also violates right-child ordering, as 5 is the right child of 30, when the right child must be greater than the parent. This is also violated by 15 being the right child of 20. The inorder sequence is not sorted because it follows the parent-child relationships, not the values of the nodes. Inorder will only sort the sequence if it is a BST.  
 3. Node 40 has a depth of 2, with the edges 50 -> 30 -> 40. When determining depth the root node is considered a depth of 0, while when determining the number of levels the root node is 1. Therefore the tree has 3 levels, despite Node 40 having a depth of 2.
-4. You enqueue the root, dequeue the front node, append its value, and then enqueue both its left and right child. The nodes enqueued first are processed first, so earlier levels finish before later levels, from left to right.
-5. For 'n' nodes, height 'h', and maximum width 'w', each DFS traversal takes O(n) time and O(h) auxiliary-space in the stack. Level order takes O(n) time and O(w) auxiliary-space in the queue. Recursive counting, recursive destruction, height, and sum all take O(n) time and O(h) auxiliary-space on the stack.
+4. You enqueue the root, dequeue the front node, append its value, and then enqueue both its left and right child. The nodes enqueued first are processed first, so earlier levels finish before later levels, from left to right. This is the same behavior as the queue from Assignment 2.
+5. For 'n' nodes, height 'h', and maximum width 'w', each DFS traversal takes O(n) time and O(h) auxiliary-space in the stack. Level order takes O(n) time and O(w) auxiliary-space in the queue. Recursive counting, recursive destruction, height, and sum all take O(n) time and O(h) auxiliary-space on the stack. The returned traversal vectors require an additional O(n) space, separate from the call stack or queue. A balanced tree has a height of O(log n), while a chain has a height of O(n). Dynamic-programming tabulation isn't needed because each node is visited only once, so there aren't overlapping subproblems.
 6. Postorder deletion guarantees that the children are destroyed before the parent, which contains their pointers. 'TreeNode*&' is a reference to the caller's pointer, so 'root = nullptr' clears the caller's root aswell. Deleting a parent before its child pointers and then accessing those pointers afterword would cause undefined behavior, as the memory containing the parent was already freed.
 
 
