@@ -17,7 +17,7 @@ Each node's parent will be responsible for releasing it's child.
 The empty-tree base case needed to be different for measurement functions and traversal functions. Measurement functions return 0, while traversal functions return an empty vector.
 The traversal is actaully concerened with the full vector, but to prevent unneccesary copying it is passed by reference to each of the children by its parent, meaning the vector doesn't need to be copied.
 I needed to specifically use postorder deletion to make sure child nodes are deleted before their children. This function also sets all of the pointers to nullptr after deletion.
-Levelorder needed to use a FIFO queue instead of recursion, because it needs to process nodes one at a time, from left to right.
+Level-order needed to use a FIFO queue instead of recursion, because it needs to process nodes one at a time, from left to right.
 
 **Tree A**
 
@@ -55,12 +55,12 @@ Edges: `10->left=30`, `10->right=20`, `30->right=5`, `20->right=15`.
 | Inorder | [20 30 40 50 60 70 80] | [30 5 10 20 15] |
 | Postorder | [20 40 30 60 80 70 50] | [5 30 15 20 10] |
 | Level order | [50 30 70 20 40 70 80] | [10 30 20 5 15] |
-| Nodes | [50 30 70 20 40 60 80] | [10 30 20 5 15] |
+| Nodes | [7] | [5] |
 | Leaves | [4] | [2] |
 | Height in levels | [3] | [3] |
 | Sum | [350] | [80] |
 
-**Reasoning for Preorder:** For preoder, you first print the node, then go left, then go right. For Tree A, the root node is 50, so you print that. Then you go left, and restart the process. It prints 30, then goes left, printing 20.
+**Reasoning for Preorder:** For preorder, you first print the node, then go left, then go right. For Tree A, the root node is 50, so you print that. Then you go left, and restart the process. It prints 30, then goes left, printing 20.
 This node has no children, so you go back up one level to 30, which still needs to process right. You go right to 40 and print it, go back to 30, which has finished all 3 actions, and go to 50, which still needs to go right. It goes right to 70, prints it, and 
 then goes left to 60. It prints 60, heads back up to 70 which still needs to process right, and goes right to 80 and prints it. The function then goes back up to 70, which is finished, and then goes back to 50, which is also finished and is the root, finishing the traversal.
 
@@ -124,9 +124,8 @@ If necessary, use `python3 validate.py` instead.
 
 The traversal results for Preorder, Inorder, Postorder, and Level order on Tree A and Tree B are identical to the values provided in the assignment. It also correctly counts the number of nodes (7 for Tree A, 5 for Tree B), leaves (4 for Tree A, 2 for Tree B),
 the height in levels (3 for both Trees), and the Sum of all Nodes (350 for Tree A, 80 for Tree B). `tests/student_tests.cpp` has its own `main` and tests each of the four traversals plus all four measurements for each tree. The results are recorded in `tests/student_results.txt`.
-`tests/demo_results.txt` records the console output from compiling and running main.cpp. I also recompiled the demo and test program with GCC 14.2.0 and `-fsanitize=address,undefined`, then ran each with leak detection enabled and halt-on-error settings. 
-Both runs exited successfully without a reported AddressSanitizer or UndefinedBehaviorSanitizer error. Logs are in `tests/sanitizer_results.txt` and `tests/demo_sanitizer_results.txt`. The results of `tests/public_tests` are saved in `tests/public_results.txt`, the program passes all 96 checks.
-`validate.py` runs correctly and passes all checks.
+`tests/demo_results.txt` records the console output from compiling and running main.cpp. I also recompiled the demo and test program with GCC 14.2.0 and then ran each with leak detection enabled and halt-on-error settings.  Both runs exited successfully without a reported AddressSanitizer or UndefinedBehaviorSanitizer error.
+Logs are in `tests/sanitizer_results.txt` and `tests/demo_sanitizer_results.txt`. The results of `tests/public_tests` are saved in `tests/public_results.txt`, the program passes all 96 checks. `validate.py` runs correctly and passes all checks.
 
 - **Pre:** Preorder
 - **In:** Inorder
