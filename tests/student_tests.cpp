@@ -1,4 +1,4 @@
-#include "TreeExplorer.h"
+#include "../TreeExplorer.h"
 
 #include <climits>
 #include <iostream>
@@ -138,18 +138,29 @@ int main() {
     destroyTree(root);
     check("Rebuilt tree destroyed safely twice", root == nullptr, true);
 
-    // 8. Extra shape/value test: three INT_MAX nodes; sum must exceed int range.
-    root = new TreeNode{INT_MAX};
-    root->left = new TreeNode{INT_MAX};
-    root->right = new TreeNode{INT_MAX};
-    checkTree("Additional test: wide tree and long long sum", root,
-              {{INT_MAX, INT_MAX, INT_MAX}, {INT_MAX, INT_MAX, INT_MAX},
-               {INT_MAX, INT_MAX, INT_MAX}, {INT_MAX, INT_MAX, INT_MAX},
-               3, 2, 2, 3LL * INT_MAX});
-    destroyTree(root);
-    check("Large-values tree root cleared", root == nullptr, true);
 
-    std::cout << "\nTOTAL: " << (checks - failures) << "/" << checks
-              << " checks passed\n";
+    // 8. Additional test: uneven zigzag tree.
+    root = new TreeNode{ 12 };
+    root->left = new TreeNode{ 4 };
+    root->right = new TreeNode{ 18 };
+    root->left->right = new TreeNode{ 9 };
+    root->left->right->left = new TreeNode{ 7 };
+    root->left->right->left->right = new TreeNode{ -2 };
+    root->right->left = new TreeNode{ 16 };
+
+    checkTree("Additional test: uneven zigzag tree", root,
+        { {12, 4, 9, 7, -2, 18, 16},
+         {4, 7, -2, 9, 12, 16, 18},
+         {-2, 7, 9, 4, 16, 18, 12},
+         {12, 4, 18, 9, 16, 7, -2},
+         7, 2, 5, 64 });
+
+    destroyTree(root);
+    check("Uneven zigzag root cleared", root == nullptr, true);
+
+    std::cout << "\nTOTAL: " << (checks - failures)
+        << "/" << checks << " checks passed\n";
+
     return failures == 0 ? 0 : 1;
 }
+

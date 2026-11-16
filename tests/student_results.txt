@@ -70,15 +70,15 @@ Rebuilt two-node tree
   PASS Sum | expected: 5 | actual: 5
   PASS Rebuilt tree destroyed safely twice | expected: 1 | actual: 1
 
-Additional test: wide tree and long long sum
-  PASS Preorder | expected: [2147483647, 2147483647, 2147483647] | actual: [2147483647, 2147483647, 2147483647]
-  PASS Inorder | expected: [2147483647, 2147483647, 2147483647] | actual: [2147483647, 2147483647, 2147483647]
-  PASS Postorder | expected: [2147483647, 2147483647, 2147483647] | actual: [2147483647, 2147483647, 2147483647]
-  PASS Level order | expected: [2147483647, 2147483647, 2147483647] | actual: [2147483647, 2147483647, 2147483647]
-  PASS Nodes | expected: 3 | actual: 3
+Additional test: uneven zigzag tree
+  PASS Preorder | expected: [12, 4, 9, 7, -2, 18, 16] | actual: [12, 4, 9, 7, -2, 18, 16]
+  PASS Inorder | expected: [4, 7, -2, 9, 12, 16, 18] | actual: [4, 7, -2, 9, 12, 16, 18]
+  PASS Postorder | expected: [-2, 7, 9, 4, 16, 18, 12] | actual: [-2, 7, 9, 4, 16, 18, 12]
+  PASS Level order | expected: [12, 4, 18, 9, 16, 7, -2] | actual: [12, 4, 18, 9, 16, 7, -2]
+  PASS Nodes | expected: 7 | actual: 7
   PASS Leaves | expected: 2 | actual: 2
-  PASS Height | expected: 2 | actual: 2
-  PASS Sum | expected: 6442450941 | actual: 6442450941
-  PASS Large-values tree root cleared | expected: 1 | actual: 1
+  PASS Height | expected: 5 | actual: 5
+  PASS Sum | expected: 64 | actual: 64
+  PASS Uneven zigzag root cleared | expected: 1 | actual: 1
 
 TOTAL: 68/68 checks passed
